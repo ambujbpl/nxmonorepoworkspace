@@ -1,0 +1,35 @@
+{
+  "name": "@my-monorepo/frontend-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "projectType": "application",
+    "implicitDependencies": [
+      "@my-monorepo/frontend"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/playwright:playwright",
+        "outputs": ["{projectRoot}/playwright-report"],
+        "options": {
+          "testingType": "e2e",
+          "webServerCommand": "nx serve frontend",
+          "baseURL": "http://localhost:3000",
+          "playwright": true
+        },
+        "configurations": {
+          "ci": {
+            "ci": true,
+            "reporter": "github"
+          }
+        }
+      },
+      "lint": {
+        "executor": "@nx/eslint:lint",
+        "options": {
+          "lintFilePatterns": ["{projectRoot}/**/*.ts"]
+        }
+      }
+    }
+  }
+}
