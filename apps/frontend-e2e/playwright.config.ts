@@ -5,9 +5,7 @@ loadEnv();
 
 // For CI, you may want to set BASE_URL to the deployed application.
 const baseURL = process.env['BASE_URL'] || 'http://localhost:4200';
-const headless = process.env['HEADLESS']
-  ? ['1', 'true', 'yes', 'on'].includes(process.env['HEADLESS'].toLowerCase())
-  : !!process.env.CI;
+const headless = process.env.CI ? true : process.env['HEADLESS'] === 'true' ? true : false;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -21,7 +19,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 3 : 2,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: process.env.CI ? 'github' : 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
