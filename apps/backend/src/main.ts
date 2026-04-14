@@ -69,7 +69,6 @@ async function bootstrap() {
     });
 
     console.log('📍 Setting up routes...');
-    console.log(process.env);
     const globalPrefix = 'api';
     app.setGlobalPrefix(globalPrefix);
     const port = process.env.PORT || 3333;
