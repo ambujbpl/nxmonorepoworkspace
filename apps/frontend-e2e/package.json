@@ -12,10 +12,7 @@
         "executor": "@nx/playwright:playwright",
         "outputs": ["{projectRoot}/playwright-report"],
         "options": {
-          "testingType": "e2e",
-          "webServerCommand": "nx serve frontend",
-          "baseURL": "http://localhost:3000",
-          "playwright": true
+          "config": "{projectRoot}/playwright.config.ts"
         },
         "configurations": {
           "ci": {

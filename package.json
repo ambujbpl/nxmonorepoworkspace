@@ -7,7 +7,7 @@
     "showFrontend": "npx nx show project @my-monorepo/frontend",
     "dev": "nx run-many --projects=backend,frontend --targets=dev --parallel",
     "dev:backend": "npx nx dev backend --watch",
-    "dev:frontend": "npx nx dev frontend",
+    "dev:frontend": "npx nx serve frontend",
     "build": "npx nx run-many --projects=backend,frontend --targets=build --parallel",
     "build:backend": "npx nx build backend",
     "build:frontend": "npx nx build frontend",
