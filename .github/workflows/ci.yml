@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - main
-  pull_request:
+  workflow_run:
+    workflows:
+      - PR Title Check
     types:
-      - opened
-      - edited
-      - reopened
+      - completed
 
 env:
   NODE_VERSION: 25

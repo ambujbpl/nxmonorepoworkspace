@@ -31,9 +31,12 @@ export default defineConfig({
   },
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npx nx serve frontend',
+    command: 'npx --no-install nx serve frontend',
+    cwd: '../../',
     url: 'http://localhost:4200',
     reuseExistingServer: true,
+    timeout: 120000,
+    shell: true,
   },
   projects: [
     {
