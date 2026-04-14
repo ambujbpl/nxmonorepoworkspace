@@ -19,6 +19,20 @@ jobs:
           filter: tree:0
           fetch-depth: 0
 
+      - name: Validate pull request title
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const title = context.payload.pull_request?.title || '';
+            const pattern = /^(feat|fix|docs|chore|refactor|test|perf|style)(\(.+\))?:\s.+$/i;
+            if (!pattern.test(title)) {
+              core.setFailed(
+                `Pull request title must follow the conventional format: "type(scope): description". Example: "feat(api): add health check". Found: "${title}"`,
+              );
+            }
+
       # This enables task distribution via Nx Cloud
       # Run this command as early as possible, before dependencies are installed
       # Learn more at https://nx.dev/ci/reference/nx-cloud-cli#npx-nxcloud-startcirun

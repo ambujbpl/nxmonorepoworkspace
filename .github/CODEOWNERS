@@ -1,0 +1,5 @@
+# CODEOWNERS for this repository
+# Add the appropriate GitHub usernames or teams for ownership.
+# Example: * @my-org/backend-team @my-org/frontend-team
+
+* @my-org/core-team

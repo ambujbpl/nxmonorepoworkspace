@@ -25,21 +25,11 @@
       }
     },
     "dev": {
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
+      "executor": "nx:run-commands",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "@my-monorepo/backend:build",
-        "runBuildTargetDependencies": false,
-        "inspect": "inspect"
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "@my-monorepo/backend:build:development"
-        },
-        "production": {
-          "buildTarget": "@my-monorepo/backend:build:production"
-        }
+        "command": "node --no-inspect {projectRoot}/dist/main.js",
+        "cwd": "{workspaceRoot}"
       }
     },
     "serve": {
