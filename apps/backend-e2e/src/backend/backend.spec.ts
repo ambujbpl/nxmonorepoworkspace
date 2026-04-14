@@ -65,5 +65,9 @@ describe('Users API', () => {
       }),
     );
     expect(res.data._id || res.data.id).toBeTruthy();
+
+    // Clean up: delete the created user
+    const userId = res.data._id || res.data.id;
+    await axios.delete(`/api/users/${userId}`);
   });
 });
