@@ -18,6 +18,7 @@ permissions:
 
 jobs:
   install-deps:
+    environment: dev
     name: Install Dependencies
     runs-on: ubuntu-latest
     env:
