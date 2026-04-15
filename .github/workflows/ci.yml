@@ -1,4 +1,4 @@
-name: CI
+name: CI Pipeline
 
 on:
   push:
@@ -153,13 +153,13 @@ jobs:
       - run: npx nx e2e backend-e2e
         # continue-on-error: true
 
-      # - name: Stop backend server
-      #   run: |
-      #     if [ -f backend.pid ]; then
-      #       kill $(cat backend.pid) || true
-      #       rm backend.pid
-      #     fi
-      #   if: always()
+      - name: Stop backend server
+        run: |
+          if [ -f backend.pid ]; then
+            kill $(cat backend.pid) || true
+            rm backend.pid
+          fi
+        if: always()
 
   e2e-tests-frontend:
     environment: dev
