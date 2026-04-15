@@ -1,0 +1,2 @@
+npx nx run-many -t lint typecheck
+npm test

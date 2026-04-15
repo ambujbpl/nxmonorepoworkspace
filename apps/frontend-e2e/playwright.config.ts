@@ -5,7 +5,11 @@ loadEnv();
 
 // For CI, you may want to set BASE_URL to the deployed application.
 const baseURL = process.env['BASE_URL'] || 'http://localhost:4200';
-const headless = process.env.CI ? true : process.env['HEADLESS'] === 'true' ? true : false;
+const headless = process.env.CI
+  ? true
+  : process.env['HEADLESS'] === 'true'
+    ? true
+    : false;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -36,7 +40,6 @@ export default defineConfig({
     url: 'http://localhost:4200',
     reuseExistingServer: true,
     timeout: 120000,
-    shell: true,
   },
   projects: [
     {

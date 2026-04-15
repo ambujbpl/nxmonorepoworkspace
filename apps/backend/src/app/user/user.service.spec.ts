@@ -7,9 +7,15 @@ describe('UserService', () => {
   let service: UserService;
   const mockUserModel = {
     find: jest.fn().mockReturnValue({ exec: jest.fn().mockResolvedValue([]) }),
-    findById: jest.fn().mockReturnValue({ exec: jest.fn().mockResolvedValue(null) }),
-    findByIdAndUpdate: jest.fn().mockReturnValue({ exec: jest.fn().mockResolvedValue(null) }),
-    findByIdAndDelete: jest.fn().mockReturnValue({ exec: jest.fn().mockResolvedValue(null) }),
+    findById: jest
+      .fn()
+      .mockReturnValue({ exec: jest.fn().mockResolvedValue(null) }),
+    findByIdAndUpdate: jest
+      .fn()
+      .mockReturnValue({ exec: jest.fn().mockResolvedValue(null) }),
+    findByIdAndDelete: jest
+      .fn()
+      .mockReturnValue({ exec: jest.fn().mockResolvedValue(null) }),
     countDocuments: jest.fn().mockResolvedValue(0),
     save: jest.fn().mockResolvedValue(null),
   };
@@ -42,7 +48,9 @@ describe('UserService', () => {
   });
 
   it('should return disconnected status on connection failure', async () => {
-    mockUserModel.countDocuments.mockRejectedValue(new Error('connection failed'));
+    mockUserModel.countDocuments.mockRejectedValue(
+      new Error('connection failed'),
+    );
 
     const result = await service.checkMongoDBConnection();
 

@@ -10,7 +10,6 @@ Describe the purpose of this pull request and the problem it solves.
 - [ ] Refactoring / Tech Debt (no functional changes)
 - [ ] Documentation update
 
-
 ## Changes
 
 - What changed

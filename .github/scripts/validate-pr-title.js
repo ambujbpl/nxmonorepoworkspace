@@ -1,6 +1,7 @@
 module.exports = async function validatePrTitle({ github, context, core }) {
   const { owner, repo } = context.repo;
-  const pull_number = context.payload.pull_request?.number || context.issue.number;
+  const pull_number =
+    context.payload.pull_request?.number || context.issue.number;
   const passingExamples = [
     'feat(auth): add user profile endpoint',
     'fix(auth): resolve frontend login redirect',
@@ -28,7 +29,8 @@ module.exports = async function validatePrTitle({ github, context, core }) {
   });
 
   const { title } = pullRequest;
-  const pattern = /^(feat|fix|docs|chore|refactor|test|perf|style)(\(.+\))?: .+/;
+  const pattern =
+    /^(feat|fix|docs|chore|refactor|test|perf|style)(\(.+\))?: .+/;
   const formatMessage = [
     `PR title format: <type>(optional-scope): description`,
     'Allowed types: feat, fix, docs, chore, refactor, test, perf, style',

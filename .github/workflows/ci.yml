@@ -68,7 +68,7 @@ jobs:
   unit-tests-backend:
     name: Backend Unit Tests
     runs-on: ubuntu-latest
-    needs: install-deps
+    needs: [install-deps,lint-typecheck]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -90,7 +90,7 @@ jobs:
   unit-tests-frontend:
     name: Frontend Unit Tests
     runs-on: ubuntu-latest
-    needs: install-deps
+    needs: [install-deps,lint-typecheck]
     steps:
       - uses: actions/checkout@v4
         with:
