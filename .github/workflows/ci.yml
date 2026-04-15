@@ -12,10 +12,6 @@ on:
       - edited
       - ready_for_review
 
-env:
-  NODE_VERSION: 25
-  MONGODB_URI: ${{ secrets.MONGODB_URI }}
-
 permissions:
   actions: read
   contents: read
@@ -24,6 +20,11 @@ jobs:
   install-deps:
     name: Install Dependencies
     runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: 25
+      BASE_URL: ${{ vars.BASE_URL }}
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,9 +39,10 @@ jobs:
 
       - name: Read Secret Environment Variables
         run: |
-          echo "MONGODB_URI value is ${{ secrets.MONGODB_URI }}"
-          echo "BASE_URL value is ${{ vars.BASE_URL }}"
-          echo "env variable value are ${{ toJson(env) }}"
+          echo "MONGODB_URI value is $MONGODB_URI"
+          echo "BASE_URL value is $BASE_URL"
+          echo "env variable value are:"
+          env
 
       - name: Cache node modules
         uses: actions/cache@v3
@@ -75,7 +77,7 @@ jobs:
   unit-tests-backend:
     name: Backend Unit Tests
     runs-on: ubuntu-latest
-    needs: [install-deps,lint-typecheck]
+    needs: [install-deps, lint-typecheck]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -97,7 +99,7 @@ jobs:
   unit-tests-frontend:
     name: Frontend Unit Tests
     runs-on: ubuntu-latest
-    needs: [install-deps,lint-typecheck]
+    needs: [install-deps, lint-typecheck]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -198,7 +200,14 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: [lint-typecheck, unit-tests-backend, unit-tests-frontend, e2e-tests-backend, e2e-tests-frontend]
+    needs:
+      [
+        lint-typecheck,
+        unit-tests-backend,
+        unit-tests-frontend,
+        e2e-tests-backend,
+        e2e-tests-frontend,
+      ]
     steps:
       - uses: actions/checkout@v4
         with:
