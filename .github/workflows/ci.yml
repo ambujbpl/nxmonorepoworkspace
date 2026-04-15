@@ -14,6 +14,7 @@ on:
 
 env:
   NODE_VERSION: 25
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
 permissions:
   actions: read
@@ -34,6 +35,12 @@ jobs:
           cache: 'npm'
 
       - run: npm ci
+
+      - name: Read Secret Environment Variables
+        run: |
+          echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> $GITHUB_ENV
+          echo "NODE_ENV=ci" >> $GITHUB_ENV
+          echo "MONGODB_URI by env variable=${{ env.MONGODB_URI }}" >> $GITHUB_ENV
 
       - name: Cache node modules
         uses: actions/cache@v3
