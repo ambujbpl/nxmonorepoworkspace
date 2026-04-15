@@ -47,3 +47,7 @@ Thumbs.db
 .next
 out
 test-output
+
+# Environment variables file
+.env
+.env.local

@@ -1,3 +1,4 @@
+import dns from 'node:dns';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -15,15 +16,24 @@ import { UserModule } from './user/user.module';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        uri:
+      useFactory: (config: ConfigService) => {
+        const uri =
           config.get<string>('MONGODB_URI') ||
-          'mongodb://localhost:27017/my-monorepo',
-        serverSelectionTimeoutMS: 5000,
-        connectTimeoutMS: 5000,
-        socketTimeoutMS: 5000,
-        retryWrites: false,
-      }),
+          'mongodb://localhost:27017/my-monorepo';
+
+        if (uri.startsWith('mongodb+srv://')) {
+          dns.setServers(['8.8.8.8', '1.1.1.1']);
+        }
+
+        return {
+          uri,
+          serverSelectionTimeoutMS: 5000,
+          connectTimeoutMS: 5000,
+          socketTimeoutMS: 5000,
+          retryWrites: false,
+          family: 4,
+        };
+      },
     }),
     UserModule,
   ],
