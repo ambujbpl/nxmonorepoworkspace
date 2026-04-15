@@ -151,15 +151,15 @@ jobs:
           echo "Backend is ready!"
 
       - run: npx nx e2e backend-e2e
-        continue-on-error: true
+        # continue-on-error: true
 
-      - name: Stop backend server
-        run: |
-          if [ -f backend.pid ]; then
-            kill $(cat backend.pid) || true
-            rm backend.pid
-          fi
-        if: always()
+      # - name: Stop backend server
+      #   run: |
+      #     if [ -f backend.pid ]; then
+      #       kill $(cat backend.pid) || true
+      #       rm backend.pid
+      #     fi
+      #   if: always()
 
   e2e-tests-frontend:
     environment: dev
@@ -183,15 +183,17 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: Start frontend dev server
-        run: npx nx serve frontend &
+        run: |
+          export BASE_URL="${{ env.BASE_URL }}"
+          npx nx serve frontend
         working-directory: .
 
       - name: Wait for frontend server
         run: |
-          timeout 60 bash -c 'until curl -f http://localhost:4200 > /dev/null 2>&1; do sleep 1; done'
+          timeout 60 bash -c 'until curl -f $BASE_URL > /dev/null 2>&1; do sleep 1; done'
 
       - run: npx nx e2e frontend-e2e
-        continue-on-error: true
+        # continue-on-error: true
 
   build:
     name: Build
