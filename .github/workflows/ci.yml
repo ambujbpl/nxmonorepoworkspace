@@ -7,8 +7,10 @@ on:
   pull_request:
     types:
       - opened
-      - edited
       - reopened
+      - synchronize
+      - edited
+      - ready_for_review
 
 env:
   NODE_VERSION: 25
