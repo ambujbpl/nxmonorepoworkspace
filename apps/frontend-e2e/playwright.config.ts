@@ -1,33 +1,45 @@
 import { defineConfig, devices } from '@playwright/test';
-import { nxE2EPreset } from '@nx/playwright/preset';
-import { workspaceRoot } from '@nx/devkit';
+import { config as loadEnv } from 'dotenv';
 
-// For CI, you may want to set BASE_URL to the deployed application.
-const baseURL = process.env['BASE_URL'] || 'http://localhost:3000';
+loadEnv();
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
+const isCI = !!process.env.CI;
+const baseURL = process.env['BASE_URL'] || (isCI ? 'http://127.0.0.1:4200' : 'http://localhost:4200');
+const headless = isCI
+  ? true
+  : process.env['HEADLESS'] === 'true'
+    ? true
+    : false;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  ...nxE2EPreset(__filename, { testDir: './src' }),
+  testDir: './src',
+  /* Run tests in files in parallel */
+  fullyParallel: true,
+  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  forbidOnly: isCI,
+  /* Retry on CI only */
+  retries: isCI ? 2 : 0,
+  /* Keep CI more stable for browser startup timing. */
+  workers: isCI ? 1 : 2,
+  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  reporter: process.env.CI ? 'github' : 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL,
+    headless,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npx nx run @my-monorepo/frontend:dev',
-    url: 'http://localhost:3000',
+    command: 'npx --no-install nx serve @my-monorepo/frontend',
+    cwd: '../../',
+    url: isCI ? 'http://127.0.0.1:4200' : 'http://localhost:4200',
     reuseExistingServer: true,
-    cwd: workspaceRoot,
+    timeout: 120000,
   },
   projects: [
     {
@@ -39,11 +51,12 @@ export default defineConfig({
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    
+    // Uncomment for Safari support on macOS
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     // Uncomment for mobile browsers support
     /* {

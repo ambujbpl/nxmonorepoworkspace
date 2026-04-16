@@ -5,15 +5,15 @@
   "scripts": {
     "showBackend": "npx nx show project @my-monorepo/backend",
     "showFrontend": "npx nx show project @my-monorepo/frontend",
-    "dev": "nx run-many --projects=backend,frontend --targets=dev --parallel",
-    "dev:backend": "npx nx dev backend --watch",
+    "dev": "npx nx run-many --projects=backend,frontend --targets=dev --parallel",
+    "dev:backend": "npx nx dev backend",
     "dev:frontend": "npx nx dev frontend",
     "build": "npx nx run-many --projects=backend,frontend --targets=build --parallel",
     "build:backend": "npx nx build backend",
     "build:frontend": "npx nx build frontend",
-    "start": "npx nx start backend",
-    "start:backend": "npx nx serve backend",
-    "start:frontend": "npx nx start frontend",
+    "start": "npx nx serve backend --configuration=production",
+    "start:backend": "npx nx serve backend --configuration=production",
+    "start:frontend": "npx nx serve frontend --configuration=production",
     "test": "npx nx run-many --projects=backend,frontend --targets=test",
     "test:backend": "npx nx test backend",
     "test:frontend": "npx nx test frontend",
@@ -27,7 +27,8 @@
     "graph": "npx nx graph",
     "affected:build": "npx nx affected:build",
     "affected:test": "npx nx affected:test",
-    "affected:lint": "npx nx affected:lint"
+    "affected:lint": "npx nx affected:lint",
+    "prepare": "husky"
   },
   "private": true,
   "devDependencies": {
@@ -67,6 +68,7 @@
     "eslint-plugin-playwright": "^1.6.2",
     "eslint-plugin-react": "7.35.0",
     "eslint-plugin-react-hooks": "5.0.0",
+    "husky": "^9.1.7",
     "jest": "^30.0.2",
     "jest-environment-jsdom": "^30.0.2",
     "jest-environment-node": "^30.0.2",

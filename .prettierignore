@@ -1,5 +1,10 @@
-# Add files here to ignore them from prettier formatting
-/dist
-/coverage
-/.nx/cache
-/.nx/workspace-data
+# Generated and third-party files should not be formatted
+node_modules
+dist
+coverage
+.next
+.nx
+out-tsc
+test-output
+test-results
+playwright-report
