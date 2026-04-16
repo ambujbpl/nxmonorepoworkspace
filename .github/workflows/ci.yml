@@ -39,11 +39,6 @@ jobs:
 
       - run: npm ci
 
-      - name: Read Secret Environment Variables
-        run: |
-          echo "env variable value are:"
-          env
-
       - name: Cache node modules
         uses: actions/cache@v3
         with:
@@ -186,7 +181,7 @@ jobs:
 
       - name: Start frontend dev server
         run: |
-          npx nx serve frontend --hostname=127.0.0.1 > frontend.log 2>&1 &
+          npx nx serve @my-monorepo/frontend --hostname=127.0.0.1 > frontend.log 2>&1 &
           echo $! > frontend.pid
         working-directory: .
 

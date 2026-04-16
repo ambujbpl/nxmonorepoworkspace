@@ -51,3 +51,7 @@ test-output
 # Environment variables file
 .env
 .env.local
+
+apps/**/test-results/
+
+apps/**/playwright-report/

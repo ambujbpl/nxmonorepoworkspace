@@ -21,6 +21,20 @@
         }
       }
     },
+    "dev": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "@my-monorepo/frontend:build:development",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "@my-monorepo/frontend:build:development",
+          "dev": true
+        }
+      }
+    },
     "serve": {
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
