@@ -35,7 +35,7 @@ export default defineConfig({
   },
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npx --no-install nx serve frontend',
+    command: 'npx --no-install nx serve @my-monorepo/frontend',
     cwd: '../../',
     url: isCI ? 'http://127.0.0.1:4200' : 'http://localhost:4200',
     reuseExistingServer: true,

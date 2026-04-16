@@ -20,9 +20,20 @@ jobs:
           fetch-depth: 0
 
       - name: Validate pull request title
+        id: validate_pr_title
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          result-encoding: string
           script: |
             const script = require('${{ github.workspace }}/.github/scripts/validate-pr-title.js');
-            await script({ github, context, core });
+            const result = await script({ github, context, core });
+            return JSON.stringify(result, null, 2);
+
+      - name: Echo PR validation confirmation
+        if: success()
+        env:
+          VALIDATION_RESULT: ${{ steps.validate_pr_title.outputs.result }}
+        run: |
+          echo "PR validated successfully in the Validate PR pipeline job."
+          echo "$VALIDATION_RESULT"
