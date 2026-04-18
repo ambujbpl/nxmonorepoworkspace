@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "nodemon --watch src --ext ts,json --exec \"ts-node --project tsconfig.app.json src/main.ts\"",
+    "start": "npx nx dev @my-monorepo/backend",
     "start:dev": "npm run start"
   },
   "dependencies": {
