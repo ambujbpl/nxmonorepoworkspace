@@ -2,6 +2,9 @@ const { NxAppWebpackPlugin } = require('@nx/webpack/app-plugin');
 const { join } = require('path');
 
 module.exports = {
+  resolve: {
+    conditionNames: ['@my-monorepo/source', '...'],
+  },
   output: {
     path: join(__dirname, 'dist'),
     clean: true,
@@ -19,6 +22,15 @@ module.exports = {
       optimization: false,
       outputHashing: 'none',
       generatePackageJson: false,
+      externalDependencies: [
+        '@nestjs/common',
+        '@nestjs/config',
+        '@nestjs/core',
+        '@nestjs/mongoose',
+        '@nestjs/platform-express',
+        'mongoose',
+        'tslib',
+      ],
       sourceMap: true,
     }),
   ],
