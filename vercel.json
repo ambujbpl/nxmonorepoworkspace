@@ -2,6 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "installCommand": "HUSKY=0 NPM_CONFIG_PRODUCTION=false npm install --include=dev",
-  "buildCommand": "npx nx build frontend --configuration=production",
+  "buildCommand": "cd apps/frontend && npx next build",
   "outputDirectory": "apps/frontend/.next"
 }
