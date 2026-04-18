@@ -24,7 +24,7 @@
     "lint": "npx nx run-many --projects=backend,frontend,@my-monorepo/shared-utils --targets=lint --parallel",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,scss,css}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,scss,css}\"",
-    "typecheck": "npx nx run-many --projects=backend,frontend,@my-monorepo/shared-utils --targets=typecheck --parallel",
+    "typecheck": "npx nx run-many --projects=@my-monorepo/backend,@my-monorepo/frontend,@my-monorepo/shared-utils --targets=typecheck --parallel",
     "graph": "npx nx graph",
     "affected:build": "npx nx affected:build",
     "affected:test": "npx nx affected:test",
