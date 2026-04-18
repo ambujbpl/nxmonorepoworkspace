@@ -1,9 +1,10 @@
 import {
   createHmac,
   randomBytes,
-  scryptSync,
+  scrypt,
   timingSafeEqual,
 } from 'crypto';
+import { promisify } from 'util';
 import { UnauthorizedException } from '@nestjs/common';
 
 export type JwtPayload = {
@@ -14,22 +15,23 @@ export type JwtPayload = {
 };
 
 const DEFAULT_JWT_EXPIRES_IN_SECONDS = 60 * 60 * 24;
+const scryptAsync = promisify(scrypt);
 
-export function hashPassword(password: string) {
+export async function hashPassword(password: string) {
   const salt = randomBytes(16).toString('hex');
-  const hashedPassword = scryptSync(password, salt, 64).toString('hex');
+  const hashedPassword = (await scryptAsync(password, salt, 64)).toString('hex');
 
   return `${salt}:${hashedPassword}`;
 }
 
-export function verifyPassword(password: string, storedPassword: string) {
+export async function verifyPassword(password: string, storedPassword: string) {
   const [salt, storedHash] = storedPassword.split(':');
 
   if (!salt || !storedHash) {
     return false;
   }
 
-  const derivedKey = scryptSync(password, salt, 64);
+  const derivedKey = (await scryptAsync(password, salt, 64)) as Buffer;
   const storedKey = Buffer.from(storedHash, 'hex');
 
   if (derivedKey.length !== storedKey.length) {
