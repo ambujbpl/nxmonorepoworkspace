@@ -4,6 +4,7 @@ import {
   scryptSync,
   timingSafeEqual,
 } from 'crypto';
+
 import { UnauthorizedException } from '@nestjs/common';
 
 export type JwtPayload = {
