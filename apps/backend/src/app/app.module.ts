@@ -29,7 +29,7 @@ const mongoLogger = new Logger('MongoDB');
 
         return {
           uri,
-          lazyConnection: true,
+          // lazyConnection: true,
           serverSelectionTimeoutMS: 5000,
           connectTimeoutMS: 5000,
           socketTimeoutMS: 5000,
