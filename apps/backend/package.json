@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "npx nx dev @my-monorepo/backend",
+    "start": "nodemon --watch src --watch ../../packages/shared-utils/src --ext ts,js,json --exec \"npx nx dev @my-monorepo/backend\"",
     "start:dev": "npm run start"
   },
   "dependencies": {
