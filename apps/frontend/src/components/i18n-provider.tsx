@@ -10,13 +10,17 @@ function resolveInitialLanguage() {
   }
 
   const savedLanguage = window.localStorage.getItem('appLanguage');
-  if (savedLanguage && languageOptions.some(({ code }) => code === savedLanguage)) {
+  if (
+    savedLanguage &&
+    languageOptions.some(({ code }) => code === savedLanguage)
+  ) {
     return savedLanguage;
   }
 
   const browserLanguage = window.navigator.language.toLowerCase();
   const matchedLanguage = languageOptions.find(
-    ({ code }) => browserLanguage === code || browserLanguage.startsWith(`${code}-`)
+    ({ code }) =>
+      browserLanguage === code || browserLanguage.startsWith(`${code}-`),
   );
 
   return matchedLanguage?.code ?? defaultLanguage;

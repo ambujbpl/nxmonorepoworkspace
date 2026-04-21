@@ -14,7 +14,10 @@ export function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState<LoginStatus>({ tone: 'idle', message: '' });
+  const [status, setStatus] = useState<LoginStatus>({
+    tone: 'idle',
+    message: '',
+  });
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -49,7 +52,9 @@ export function LoginForm() {
       setStatus({
         tone: 'error',
         message:
-          error instanceof Error ? error.message : t('forms.errors.loginGeneric'),
+          error instanceof Error
+            ? error.message
+            : t('forms.errors.loginGeneric'),
       });
     } finally {
       setIsSubmitting(false);
@@ -59,7 +64,10 @@ export function LoginForm() {
   return (
     <form className="space-y-5" onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="email" className="mb-2 block text-sm font-semibold text-slate-700">
+        <label
+          htmlFor="email"
+          className="mb-2 block text-sm font-semibold text-slate-700"
+        >
           {t('forms.workEmail')}
         </label>
         <input
@@ -77,10 +85,15 @@ export function LoginForm() {
 
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label htmlFor="password" className="block text-sm font-semibold text-slate-700">
+          <label
+            htmlFor="password"
+            className="block text-sm font-semibold text-slate-700"
+          >
             {t('forms.password')}
           </label>
-          <span className="text-xs text-slate-500">{t('forms.minimumEightCharacters')}</span>
+          <span className="text-xs text-slate-500">
+            {t('forms.minimumEightCharacters')}
+          </span>
         </div>
         <input
           id="password"

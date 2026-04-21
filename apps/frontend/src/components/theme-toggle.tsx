@@ -14,7 +14,8 @@ function resolveInitialTheme(): ThemeMode {
     return savedTheme;
   }
 
-  return typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: dark)').matches
+  return typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
     ? 'dark'
     : 'light';
 }
@@ -43,7 +44,9 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={handleToggle}
-      aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+      aria-label={
+        theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'
+      }
       title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
       className="rounded-full border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:border-sky-400 hover:text-sky-700"
     >

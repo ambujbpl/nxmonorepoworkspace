@@ -28,7 +28,9 @@ describe('RegisterForm', () => {
     });
     fireEvent.click(screen.getByRole('button', { name: /create account/i }));
 
-    expect(await screen.findByText(/password and confirm password must match/i)).toBeTruthy();
+    expect(
+      await screen.findByText(/password and confirm password must match/i),
+    ).toBeTruthy();
     expect(global.fetch).not.toHaveBeenCalled();
   });
 
@@ -57,10 +59,18 @@ describe('RegisterForm', () => {
     });
     fireEvent.click(screen.getByRole('button', { name: /create account/i }));
 
-    expect(await screen.findByText(/account created successfully/i)).toBeTruthy();
-    expect(window.localStorage.getItem('registeredUserEmail')).toBe('ambuj@example.com');
+    expect(
+      await screen.findByText(/account created successfully/i),
+    ).toBeTruthy();
+    expect(window.localStorage.getItem('registeredUserEmail')).toBe(
+      'ambuj@example.com',
+    );
     await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
-    expect((screen.getByLabelText(/full name/i) as HTMLInputElement).value).toBe('');
-    expect((screen.getByLabelText(/work email/i) as HTMLInputElement).value).toBe('');
+    expect(
+      (screen.getByLabelText(/full name/i) as HTMLInputElement).value,
+    ).toBe('');
+    expect(
+      (screen.getByLabelText(/work email/i) as HTMLInputElement).value,
+    ).toBe('');
   });
 });

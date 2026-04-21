@@ -1,9 +1,4 @@
-import {
-  createHmac,
-  randomBytes,
-  scryptSync,
-  timingSafeEqual,
-} from 'crypto';
+import { createHmac, randomBytes, scryptSync, timingSafeEqual } from 'crypto';
 
 import { UnauthorizedException } from '@nestjs/common';
 
@@ -47,9 +42,9 @@ export function createJwtToken(
   expiresInSeconds = DEFAULT_JWT_EXPIRES_IN_SECONDS,
 ) {
   const now = Math.floor(Date.now() / 1000);
-  const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString(
-    'base64url',
-  );
+  const header = Buffer.from(
+    JSON.stringify({ alg: 'HS256', typ: 'JWT' }),
+  ).toString('base64url');
   const payload = Buffer.from(
     JSON.stringify({
       sub: userId,

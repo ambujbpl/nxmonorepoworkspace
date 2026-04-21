@@ -16,6 +16,8 @@ describe('ThemeToggle', () => {
 
     expect(document.documentElement.dataset.theme).toBe('dark');
     expect(window.localStorage.getItem('appTheme')).toBe('dark');
-    expect(screen.getByRole('button', { name: /switch to light mode/i })).toBeTruthy();
+    expect(
+      screen.getByRole('button', { name: /switch to light mode/i }),
+    ).toBeTruthy();
   });
 });

@@ -8,10 +8,12 @@ describe('Loan category experience', () => {
     render(<HomePage />);
 
     expect(
-      screen.getByRole('heading', { name: /loan management categories/i })
+      screen.getByRole('heading', { name: /loan management categories/i }),
     ).toBeTruthy();
     expect(
-      screen.getByRole('link', { name: /retail loan management systems/i }).getAttribute('href')
+      screen
+        .getByRole('link', { name: /retail loan management systems/i })
+        .getAttribute('href'),
     ).toBe('/loan-types/retail-loan-management-systems');
   });
 
@@ -29,7 +31,7 @@ describe('Loan category experience', () => {
     expect(
       screen.getByRole('heading', {
         name: /ai-powered end-to-end platforms/i,
-      })
+      }),
     ).toBeTruthy();
     expect(screen.getByText(/modern banks, digital-first nbfcs/i)).toBeTruthy();
   });

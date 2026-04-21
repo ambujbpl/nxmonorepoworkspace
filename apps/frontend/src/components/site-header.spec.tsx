@@ -26,7 +26,11 @@ describe('SiteHeader', () => {
 
     render(<SiteHeader />);
 
-    expect(screen.getByRole('link', { name: /loan management system/i }).getAttribute('href')).toBe('/');
+    expect(
+      screen
+        .getByRole('link', { name: /loan management system/i })
+        .getAttribute('href'),
+    ).toBe('/');
   });
 
   it('shows home-page-only items on the home page', () => {
@@ -34,9 +38,15 @@ describe('SiteHeader', () => {
 
     render(<SiteHeader />);
 
-    expect(screen.getByRole('link', { name: /features/i }).getAttribute('href')).toBe('#features');
-    expect(screen.getByRole('link', { name: /benefits/i }).getAttribute('href')).toBe('#benefits');
-    expect(screen.getByRole('link', { name: /loan types/i }).getAttribute('href')).toBe('/loan-types');
+    expect(
+      screen.getByRole('link', { name: /features/i }).getAttribute('href'),
+    ).toBe('#features');
+    expect(
+      screen.getByRole('link', { name: /benefits/i }).getAttribute('href'),
+    ).toBe('#benefits');
+    expect(
+      screen.getByRole('link', { name: /loan types/i }).getAttribute('href'),
+    ).toBe('/loan-types');
   });
 
   it('hides home-page-only items and the current page link on non-home pages', () => {
@@ -56,6 +66,8 @@ describe('SiteHeader', () => {
     render(<SiteHeader />);
 
     expect(screen.queryByRole('link', { name: /loan types/i })).toBeNull();
-    expect(screen.getByRole('link', { name: /^register$/i }).getAttribute('href')).toBe('/register');
+    expect(
+      screen.getByRole('link', { name: /^register$/i }).getAttribute('href'),
+    ).toBe('/register');
   });
 });

@@ -5,16 +5,23 @@ import { User } from '../schema/user.schema';
 
 describe('UserService', () => {
   let service: UserService;
-  const saveMock = jest.fn().mockImplementation(function (this: Record<string, unknown>) {
+  const saveMock = jest.fn().mockImplementation(function (
+    this: Record<string, unknown>,
+  ) {
     return Promise.resolve({ ...this });
   });
   const mockUserModel = Object.assign(
-    jest.fn().mockImplementation(function (this: Record<string, unknown>, data: Record<string, unknown>) {
+    jest.fn().mockImplementation(function (
+      this: Record<string, unknown>,
+      data: Record<string, unknown>,
+    ) {
       Object.assign(this, data);
       this.save = saveMock;
     }),
     {
-      find: jest.fn().mockReturnValue({ exec: jest.fn().mockResolvedValue([]) }),
+      find: jest
+        .fn()
+        .mockReturnValue({ exec: jest.fn().mockResolvedValue([]) }),
       findById: jest
         .fn()
         .mockReturnValue({ exec: jest.fn().mockResolvedValue(null) }),
@@ -69,14 +76,21 @@ describe('UserService', () => {
   });
 
   it('should not return the password when creating a user', async () => {
-    const createdUser = await (service as unknown as {
-      createUser: (
-        name: string,
-        email: string,
-        age: number | undefined,
-        password: string,
-      ) => Promise<{ password?: string; email: string; name: string; age?: number }>;
-    }).createUser('Test User', 'test@example.com', 25, 'plainPassword123');
+    const createdUser = await (
+      service as unknown as {
+        createUser: (
+          name: string,
+          email: string,
+          age: number | undefined,
+          password: string,
+        ) => Promise<{
+          password?: string;
+          email: string;
+          name: string;
+          age?: number;
+        }>;
+      }
+    ).createUser('Test User', 'test@example.com', 25, 'plainPassword123');
 
     expect(createdUser.name).toBe('Test User');
     expect(createdUser.email).toBe('test@example.com');
@@ -88,14 +102,16 @@ describe('UserService', () => {
     saveMock.mockRejectedValueOnce({ code: 11000 });
 
     await expect(
-      (service as unknown as {
-        createUser: (
-          name: string,
-          email: string,
-          age: number | undefined,
-          password: string,
-        ) => Promise<unknown>;
-      }).createUser('Test User', 'test@example.com', 25, 'plainPassword123'),
+      (
+        service as unknown as {
+          createUser: (
+            name: string,
+            email: string,
+            age: number | undefined,
+            password: string,
+          ) => Promise<unknown>;
+        }
+      ).createUser('Test User', 'test@example.com', 25, 'plainPassword123'),
     ).rejects.toThrow('Email test@example.com already exists');
   });
 

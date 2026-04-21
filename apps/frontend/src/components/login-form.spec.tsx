@@ -29,7 +29,9 @@ describe('LoginForm', () => {
 
     expect(await screen.findByText(/login successful/i)).toBeTruthy();
     expect(window.localStorage.getItem('accessToken')).toBe('token-123');
-    expect(window.localStorage.getItem('userEmail')).toBe('analyst@fincore.example');
+    expect(window.localStorage.getItem('userEmail')).toBe(
+      'analyst@fincore.example',
+    );
     await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
   });
 

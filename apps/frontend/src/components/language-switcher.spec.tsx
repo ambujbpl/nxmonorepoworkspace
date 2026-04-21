@@ -17,7 +17,9 @@ describe('LanguageSwitcher', () => {
       target: { value: 'mr' },
     });
 
-    await waitFor(() => expect(window.localStorage.getItem('appLanguage')).toBe('mr'));
+    await waitFor(() =>
+      expect(window.localStorage.getItem('appLanguage')).toBe('mr'),
+    );
     expect(document.documentElement.lang).toBe('mr');
   });
 });

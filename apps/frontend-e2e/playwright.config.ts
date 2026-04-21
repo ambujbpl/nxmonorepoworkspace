@@ -4,7 +4,9 @@ import { config as loadEnv } from 'dotenv';
 loadEnv();
 
 const isCI = !!process.env.CI;
-const baseURL = process.env['BASE_URL'] || (isCI ? 'http://127.0.0.1:4200' : 'http://localhost:4200');
+const baseURL =
+  process.env['BASE_URL'] ||
+  (isCI ? 'http://127.0.0.1:4200' : 'http://localhost:4200');
 const headless = isCI
   ? true
   : process.env['HEADLESS'] === 'true'
@@ -51,7 +53,7 @@ export default defineConfig({
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
-    
+
     // Uncomment for Safari support on macOS
     // {
     //   name: 'webkit',

@@ -35,14 +35,23 @@ export class UserController {
 
   @Get('users/:id')
   async getUserById(@Param('id') id: string) {
-    validateBody<ObjectIdParams>(objectIdParamSchema, { id }, 'Invalid user id');
+    validateBody<ObjectIdParams>(
+      objectIdParamSchema,
+      { id },
+      'Invalid user id',
+    );
     return this.userService.getUserById(id);
   }
 
   @Post('users')
   async createUser(@Body() body: unknown) {
     validateBody<CreateUserBody>(postUserSchema, body);
-    return this.userService.createUser(body.name, body.email, body.age, body.password);
+    return this.userService.createUser(
+      body.name,
+      body.email,
+      body.age,
+      body.password,
+    );
   }
 
   @Post('login')
@@ -71,14 +80,22 @@ export class UserController {
 
   @Put('users/:id')
   async updateUser(@Param('id') id: string, @Body() updateData: unknown) {
-    validateBody<ObjectIdParams>(objectIdParamSchema, { id }, 'Invalid user id');
+    validateBody<ObjectIdParams>(
+      objectIdParamSchema,
+      { id },
+      'Invalid user id',
+    );
     validateBody<PutUserBody>(putUserSchema, updateData);
     return this.userService.updateUser(id, updateData as Partial<User>);
   }
 
   @Delete('users/:id')
   async deleteUser(@Param('id') id: string) {
-    validateBody<ObjectIdParams>(objectIdParamSchema, { id }, 'Invalid user id');
+    validateBody<ObjectIdParams>(
+      objectIdParamSchema,
+      { id },
+      'Invalid user id',
+    );
     return this.userService.deleteUser(id);
   }
 }

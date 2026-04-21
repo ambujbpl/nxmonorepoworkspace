@@ -12,16 +12,42 @@ export function SiteHeader() {
   const pathname = usePathname();
 
   const navItems = [
-    { label: t('header.features'), href: '#features', onlyAccessibleForHomePage: true },
-    { label: t('header.loanTypes'), href: '/loan-types', onlyAccessibleForHomePage: false },
-    { label: t('header.benefits'), href: '#benefits', onlyAccessibleForHomePage: true },
-    { label: t('header.contact'), href: '#contact', onlyAccessibleForHomePage: false },
-    { label: t('header.register'), href: '/register', onlyAccessibleForHomePage: false },
-    { label: t('header.login'), href: '/login', onlyAccessibleForHomePage: false },
+    {
+      label: t('header.features'),
+      href: '#features',
+      onlyAccessibleForHomePage: true,
+    },
+    {
+      label: t('header.loanTypes'),
+      href: '/loan-types',
+      onlyAccessibleForHomePage: false,
+    },
+    {
+      label: t('header.benefits'),
+      href: '#benefits',
+      onlyAccessibleForHomePage: true,
+    },
+    {
+      label: t('header.contact'),
+      href: '#contact',
+      onlyAccessibleForHomePage: false,
+    },
+    {
+      label: t('header.register'),
+      href: '/register',
+      onlyAccessibleForHomePage: false,
+    },
+    {
+      label: t('header.login'),
+      href: '/login',
+      onlyAccessibleForHomePage: false,
+    },
   ];
 
   const visibleNavItems = navItems.filter(
-    (item) => (!item.onlyAccessibleForHomePage || pathname === '/') && pathname !== item.href
+    (item) =>
+      (!item.onlyAccessibleForHomePage || pathname === '/') &&
+      pathname !== item.href,
   );
 
   return (
@@ -31,20 +57,30 @@ export function SiteHeader() {
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-700">
             FinCore Suite
           </p>
-          <h1 className="text-lg font-bold text-slate-900">{t('common.appName')}</h1>
+          <h1 className="text-lg font-bold text-slate-900">
+            {t('common.appName')}
+          </h1>
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
           {visibleNavItems.map((item) =>
             item.href.startsWith('/') ? (
-              <Link key={item.href} href={item.href} className="transition hover:text-sky-700">
+              <Link
+                key={item.href}
+                href={item.href}
+                className="transition hover:text-sky-700"
+              >
                 {item.label}
               </Link>
             ) : (
-              <a key={item.href} href={item.href} className="transition hover:text-sky-700">
+              <a
+                key={item.href}
+                href={item.href}
+                className="transition hover:text-sky-700"
+              >
                 {item.label}
               </a>
-            )
+            ),
           )}
         </nav>
 

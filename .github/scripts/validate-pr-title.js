@@ -48,7 +48,13 @@ module.exports = async function validatePrTitle({ github, context, core }) {
   if (!title || typeof title !== 'string') {
     const errorMessage = `PR title is required.\n${titleDetails}\n${formatMessage}`;
     core.setFailed(errorMessage);
-    return { valid: false, error: errorMessage, owner, repo, pullNumber: pull_number };
+    return {
+      valid: false,
+      error: errorMessage,
+      owner,
+      repo,
+      pullNumber: pull_number,
+    };
   }
 
   if (!pattern.test(title)) {

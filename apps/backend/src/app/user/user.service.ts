@@ -18,7 +18,8 @@ import { sanitizeUser } from './user.util';
 
 @Injectable()
 export class UserService {
-  private readonly jwtSecret = process.env.JWT_SECRET ?? 'development-jwt-secret';
+  private readonly jwtSecret =
+    process.env.JWT_SECRET ?? 'development-jwt-secret';
 
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
@@ -54,7 +55,10 @@ export class UserService {
   }
 
   async login(email: string, password: string) {
-    const user = await this.userModel.findOne({ email }).select('+password').exec();
+    const user = await this.userModel
+      .findOne({ email })
+      .select('+password')
+      .exec();
 
     if (!user || !verifyPassword(password, user.password)) {
       throw new UnauthorizedException('Invalid email or password');
@@ -73,10 +77,15 @@ export class UserService {
   ) {
     const token = extractBearerToken(authorization);
     const payload = verifyJwtToken(token, this.jwtSecret);
-    const user = await this.userModel.findById(payload.sub).select('+password').exec();
+    const user = await this.userModel
+      .findById(payload.sub)
+      .select('+password')
+      .exec();
 
     if (!user) {
-      throw new NotFoundException(`User with id ${payload.sub} not found in DB`);
+      throw new NotFoundException(
+        `User with id ${payload.sub} not found in DB`,
+      );
     }
 
     if (!verifyPassword(currentPassword, user.password)) {
