@@ -7,7 +7,9 @@ import '../../lib/i18n';
 
 export default function RegisterPage() {
   const { t } = useTranslation();
-  const onboardingPoints = t('register.points', { returnObjects: true }) as string[];
+  const onboardingPoints = t('register.points', {
+    returnObjects: true,
+  }) as string[];
 
   return (
     <main className="bg-gradient-to-br from-slate-950 via-sky-950 to-slate-900 px-6 py-12 text-white lg:px-8 lg:py-16">
@@ -16,12 +18,19 @@ export default function RegisterPage() {
           <span className="inline-flex rounded-full border border-sky-400/30 bg-sky-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-sky-200">
             {t('register.badge')}
           </span>
-          <h1 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl">{t('register.title')}</h1>
-          <p className="mt-4 max-w-2xl text-base text-slate-300 sm:text-lg">{t('register.description')}</p>
+          <h1 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl">
+            {t('register.title')}
+          </h1>
+          <p className="mt-4 max-w-2xl text-base text-slate-300 sm:text-lg">
+            {t('register.description')}
+          </p>
 
           <ul className="mt-8 space-y-3 text-sm text-slate-200">
             {onboardingPoints.map((point) => (
-              <li key={point} className="rounded-2xl border border-white/10 bg-slate-900/40 px-4 py-3">
+              <li
+                key={point}
+                className="rounded-2xl border border-white/10 bg-slate-900/40 px-4 py-3"
+              >
                 {point}
               </li>
             ))}
@@ -48,8 +57,12 @@ export default function RegisterPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-700">
               {t('register.registerUser')}
             </p>
-            <h2 className="mt-2 text-2xl font-bold">{t('register.setupAccount')}</h2>
-            <p className="mt-2 text-sm text-slate-600">{t('register.basicDetails')}</p>
+            <h2 className="mt-2 text-2xl font-bold">
+              {t('register.setupAccount')}
+            </h2>
+            <p className="mt-2 text-sm text-slate-600">
+              {t('register.basicDetails')}
+            </p>
           </div>
 
           <RegisterForm />

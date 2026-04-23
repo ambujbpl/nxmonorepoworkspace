@@ -1,7 +1,9 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('frontend auth journeys', () => {
-  test('shows a validation error when register passwords do not match', async ({ page }) => {
+  test('shows a validation error when register passwords do not match', async ({
+    page,
+  }) => {
     await page.goto('/register');
 
     await page.getByLabel(/full name/i).fill('Ambuj Sharma');
@@ -10,7 +12,9 @@ test.describe('frontend auth journeys', () => {
     await page.getByLabel(/confirm password/i).fill('DifferentPass1');
     await page.getByRole('button', { name: /create account/i }).click();
 
-    await expect(page.getByText(/password and confirm password must match/i)).toBeVisible();
+    await expect(
+      page.getByText(/password and confirm password must match/i),
+    ).toBeVisible();
   });
 
   test('submits registration successfully', async ({ page }) => {
@@ -43,7 +47,9 @@ test.describe('frontend auth journeys', () => {
     });
   });
 
-  test('signs in successfully and stores the access token', async ({ page }) => {
+  test('signs in successfully and stores the access token', async ({
+    page,
+  }) => {
     let payload: Record<string, unknown> | undefined;
 
     await page.route('**/api/login', async (route) => {

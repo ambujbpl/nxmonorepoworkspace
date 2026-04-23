@@ -17,7 +17,10 @@ export function RegisterForm() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState<RegisterStatus>({ tone: 'idle', message: '' });
+  const [status, setStatus] = useState<RegisterStatus>({
+    tone: 'idle',
+    message: '',
+  });
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -67,7 +70,9 @@ export function RegisterForm() {
       setStatus({
         tone: 'error',
         message:
-          error instanceof Error ? error.message : t('forms.errors.registerGeneric'),
+          error instanceof Error
+            ? error.message
+            : t('forms.errors.registerGeneric'),
       });
     } finally {
       setIsSubmitting(false);
@@ -77,7 +82,10 @@ export function RegisterForm() {
   return (
     <form className="space-y-5" onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="name" className="mb-2 block text-sm font-semibold text-slate-700">
+        <label
+          htmlFor="name"
+          className="mb-2 block text-sm font-semibold text-slate-700"
+        >
           {t('forms.fullName')}
         </label>
         <input
@@ -93,7 +101,10 @@ export function RegisterForm() {
       </div>
 
       <div>
-        <label htmlFor="email" className="mb-2 block text-sm font-semibold text-slate-700">
+        <label
+          htmlFor="email"
+          className="mb-2 block text-sm font-semibold text-slate-700"
+        >
           {t('forms.workEmail')}
         </label>
         <input
@@ -110,7 +121,10 @@ export function RegisterForm() {
       </div>
 
       <div>
-        <label htmlFor="age" className="mb-2 block text-sm font-semibold text-slate-700">
+        <label
+          htmlFor="age"
+          className="mb-2 block text-sm font-semibold text-slate-700"
+        >
           {t('forms.age')}
         </label>
         <input
@@ -127,10 +141,15 @@ export function RegisterForm() {
 
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label htmlFor="password" className="block text-sm font-semibold text-slate-700">
+          <label
+            htmlFor="password"
+            className="block text-sm font-semibold text-slate-700"
+          >
             {t('forms.password')}
           </label>
-          <span className="text-xs text-slate-500">{t('forms.minimumEightCharacters')}</span>
+          <span className="text-xs text-slate-500">
+            {t('forms.minimumEightCharacters')}
+          </span>
         </div>
         <input
           id="password"
@@ -147,7 +166,10 @@ export function RegisterForm() {
       </div>
 
       <div>
-        <label htmlFor="confirmPassword" className="mb-2 block text-sm font-semibold text-slate-700">
+        <label
+          htmlFor="confirmPassword"
+          className="mb-2 block text-sm font-semibold text-slate-700"
+        >
           {t('forms.confirmPassword')}
         </label>
         <input

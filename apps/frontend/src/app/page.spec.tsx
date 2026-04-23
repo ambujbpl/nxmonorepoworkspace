@@ -7,7 +7,7 @@ describe('Page', () => {
     render(<Page />);
 
     expect(
-      screen.getByRole('heading', { name: /loan management system/i })
+      screen.getByRole('heading', { name: /loan management system/i }),
     ).toBeTruthy();
     expect(screen.getByText(/track applications, disbursements/i)).toBeTruthy();
   });
@@ -15,8 +15,12 @@ describe('Page', () => {
   it('should expose key navigation calls to action', () => {
     render(<Page />);
 
-    expect(screen.getByRole('link', { name: /sign in/i }).getAttribute('href')).toBe('/login');
-    expect(screen.getByRole('link', { name: /retail loan management systems/i })).toBeTruthy();
+    expect(
+      screen.getByRole('link', { name: /sign in/i }).getAttribute('href'),
+    ).toBe('/login');
+    expect(
+      screen.getByRole('link', { name: /retail loan management systems/i }),
+    ).toBeTruthy();
   });
 
   it('should switch the landing page language to Hindi', () => {
@@ -27,7 +31,7 @@ describe('Page', () => {
     });
 
     expect(
-      screen.getByRole('heading', { name: /ऋण प्रबंधन प्रणाली/i })
+      screen.getByRole('heading', { name: /ऋण प्रबंधन प्रणाली/i }),
     ).toBeTruthy();
   });
 });

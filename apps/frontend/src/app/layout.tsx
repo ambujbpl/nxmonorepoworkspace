@@ -6,7 +6,8 @@ import { I18nProvider } from '../components/i18n-provider';
 
 export const metadata: Metadata = {
   title: 'Loan Management System',
-  description: 'A modern lending platform for borrower onboarding, approvals, disbursements, and repayment tracking.',
+  description:
+    'A modern lending platform for borrower onboarding, approvals, disbursements, and repayment tracking.',
 };
 
 export default function RootLayout({

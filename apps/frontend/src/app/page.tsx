@@ -19,7 +19,9 @@ type FeatureCard = {
 export default function Index() {
   const { t } = useTranslation();
   const metrics = t('home.metrics', { returnObjects: true }) as Metric[];
-  const features = t('home.featureCards', { returnObjects: true }) as FeatureCard[];
+  const features = t('home.featureCards', {
+    returnObjects: true,
+  }) as FeatureCard[];
 
   return (
     <main>
@@ -35,7 +37,9 @@ export default function Index() {
             <h1 className="mt-6 text-4xl font-bold tracking-tight sm:text-5xl">
               {t('home.title')}
             </h1>
-            <p className="mt-4 max-w-2xl text-lg text-slate-300">{t('home.description')}</p>
+            <p className="mt-4 max-w-2xl text-lg text-slate-300">
+              {t('home.description')}
+            </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/login"
@@ -57,7 +61,9 @@ export default function Index() {
               <div className="flex items-center justify-between border-b border-slate-800 pb-4">
                 <div>
                   <p className="text-sm text-slate-400">{t('home.snapshot')}</p>
-                  <p className="text-xl font-semibold">{t('home.portfolioOverview')}</p>
+                  <p className="text-xl font-semibold">
+                    {t('home.portfolioOverview')}
+                  </p>
                 </div>
                 <span className="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-300">
                   {t('home.healthy')}
@@ -86,7 +92,10 @@ export default function Index() {
       <section className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
         <div className="grid gap-4 md:grid-cols-3">
           {metrics.map((item) => (
-            <div key={item.label} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div
+              key={item.label}
+              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+            >
               <p className="text-2xl font-bold text-sky-700">{item.value}</p>
               <p className="mt-1 text-sm text-slate-600">{item.label}</p>
             </div>
@@ -99,7 +108,9 @@ export default function Index() {
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-700">
             {t('home.coreFeatures')}
           </p>
-          <h2 className="mt-2 text-3xl font-bold text-slate-900">{t('home.builtFor')}</h2>
+          <h2 className="mt-2 text-3xl font-bold text-slate-900">
+            {t('home.builtFor')}
+          </h2>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
@@ -108,8 +119,12 @@ export default function Index() {
               key={feature.title}
               className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
             >
-              <h3 className="text-lg font-semibold text-slate-900">{feature.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-600">{feature.description}</p>
+              <h3 className="text-lg font-semibold text-slate-900">
+                {feature.title}
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600">
+                {feature.description}
+              </p>
             </article>
           ))}
         </div>
@@ -120,22 +135,37 @@ export default function Index() {
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-700">
             {t('home.supportedModels')}
           </p>
-          <h2 className="mt-2 text-3xl font-bold text-slate-900">{t('home.categoriesTitle')}</h2>
-          <p className="mt-3 text-sm leading-6 text-slate-600">{t('home.categoriesDescription')}</p>
+          <h2 className="mt-2 text-3xl font-bold text-slate-900">
+            {t('home.categoriesTitle')}
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-slate-600">
+            {t('home.categoriesDescription')}
+          </p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {loanCategories.map((category) => (
-            <article key={category.slug} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-              <Link href={`/loan-types/${category.slug}`} className="text-lg font-semibold text-slate-900 transition hover:text-sky-700">
-                {category.title}
-              </Link>
-              <p className="mt-2 text-sm text-slate-600">{category.summary}</p>
-              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">
-                {category.bestFor}
-              </p>
-            </article>
-          ))}
+          {loanCategories.map(
+            (category) =>
+              category.isVisible && (
+                <article
+                  key={category.slug}
+                  className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"
+                >
+                  <Link
+                    href={`/loan-types/${category.slug}`}
+                    className="text-lg font-semibold text-slate-900 transition hover:text-sky-700"
+                  >
+                    {category.title}
+                  </Link>
+                  <p className="mt-2 text-sm text-slate-600">
+                    {category.summary}
+                  </p>
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">
+                    {category.bestFor}
+                  </p>
+                </article>
+              ),
+          )}
         </div>
       </section>
 
@@ -145,13 +175,21 @@ export default function Index() {
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-700">
               {t('home.whyChooseUs')}
             </p>
-            <h2 className="mt-2 text-3xl font-bold text-slate-900">{t('home.betterExperience')}</h2>
+            <h2 className="mt-2 text-3xl font-bold text-slate-900">
+              {t('home.betterExperience')}
+            </h2>
           </div>
 
           <ul className="space-y-3 text-sm text-slate-700">
-            <li className="rounded-2xl bg-white px-4 py-3 shadow-sm">{t('home.benefit1')}</li>
-            <li className="rounded-2xl bg-white px-4 py-3 shadow-sm">{t('home.benefit2')}</li>
-            <li className="rounded-2xl bg-white px-4 py-3 shadow-sm">{t('home.benefit3')}</li>
+            <li className="rounded-2xl bg-white px-4 py-3 shadow-sm">
+              {t('home.benefit1')}
+            </li>
+            <li className="rounded-2xl bg-white px-4 py-3 shadow-sm">
+              {t('home.benefit2')}
+            </li>
+            <li className="rounded-2xl bg-white px-4 py-3 shadow-sm">
+              {t('home.benefit3')}
+            </li>
           </ul>
         </div>
       </section>

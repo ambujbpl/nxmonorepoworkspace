@@ -29,7 +29,7 @@
     "affected:build": "npx nx affected:build",
     "affected:test": "npx nx affected:test",
     "affected:lint": "npx nx affected:lint",
-    "prepare": "husky"
+    "prepare": "node -e \"if (process.env.HUSKY === '0' || process.env.CI || process.env.VERCEL) { console.log('Skipping Husky install'); process.exit(0); } process.exit(1);\" || husky"
   },
   "private": true,
   "devDependencies": {

@@ -19,11 +19,14 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@my-monorepo/shared-utils": [
+        "../../packages/shared-utils/src/types/index.ts"
+      ]
     },
     "types": ["jest", "node"],
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": "../..",
     "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo"
   },
   "include": [
@@ -32,6 +35,7 @@
     "src/**/*.js",
     "src/**/*.jsx",
     "index.d.ts",
+    "../../packages/shared-utils/src/types/**/*.ts",
     "../../apps/frontend/.next/types/**/*.ts",
     "../../dist/apps/frontend/.next/types/**/*.ts",
     "next-env.d.ts"
@@ -48,5 +52,10 @@
     "eslint.config.js",
     "eslint.config.cjs",
     "eslint.config.mjs"
+  ],
+  "references": [
+    {
+      "path": "../../packages/shared-utils"
+    }
   ]
 }

@@ -9,7 +9,8 @@ export function LanguageSwitcher() {
   const { t, i18n } = useTranslation();
 
   const currentLanguage =
-    languageOptions.find(({ code }) => code === i18n.resolvedLanguage)?.code ?? defaultLanguage;
+    languageOptions.find(({ code }) => code === i18n.resolvedLanguage)?.code ??
+    defaultLanguage;
 
   async function handleLanguageChange(event: ChangeEvent<HTMLSelectElement>) {
     const nextLanguage = event.target.value;

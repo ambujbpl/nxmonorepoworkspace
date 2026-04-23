@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import '../lib/i18n';
-import type { LoanCategory } from '../app/loan-types/loan-categories';
+import { type LoanCategory } from '@my-monorepo/shared-utils';
 
 export function LoanCategoryDetail({ category }: { category: LoanCategory }) {
   const { t } = useTranslation();
@@ -11,7 +11,10 @@ export function LoanCategoryDetail({ category }: { category: LoanCategory }) {
   return (
     <main className="bg-slate-50 px-6 py-12 lg:px-8 lg:py-16">
       <div className="mx-auto max-w-5xl">
-        <Link href="/loan-types" className="text-sm font-semibold text-sky-700 hover:text-sky-800">
+        <Link
+          href="/loan-types"
+          className="text-sm font-semibold text-sky-700 hover:text-sky-800"
+        >
           ← {t('loanTypes.backToCategories')}
         </Link>
 
@@ -20,44 +23,90 @@ export function LoanCategoryDetail({ category }: { category: LoanCategory }) {
             {t('loanTypes.categoryDetail')}
           </p>
           <h1 className="mt-3 text-4xl font-bold">{category.title}</h1>
-          <p className="mt-4 max-w-3xl text-lg text-slate-300">{category.summary}</p>
+          <p className="mt-4 max-w-3xl text-lg text-slate-300">
+            {category.summary}
+          </p>
           <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-200">
-            <strong className="text-white">{t('common.bestFor')}:</strong> {category.bestFor}
+            <strong className="text-white">{t('common.bestFor')}:</strong>{' '}
+            {category.bestFor}
           </div>
         </section>
 
+        <div className="mx-auto max-w-5xl">
+          <section className="mt-4 rounded-[2rem] p-8 text-white shadow-2xl">
+            <h2 className="text-xl font-semibold text-slate-900">
+              {t('loanTypes.loanDescription')}
+            </h2>
+            <ul className="mt-4 space-y-3 text-sm text-slate-700">
+              {category.description}
+            </ul>
+          </section>
+        </div>
+
         <div className="mt-8 grid gap-6 lg:grid-cols-3">
           <section className="rounded-3xl bg-white p-6 shadow-sm lg:col-span-2">
-            <h2 className="text-xl font-semibold text-slate-900">{t('loanTypes.keyFeatures')}</h2>
+            <h2 className="text-xl font-semibold text-slate-900">
+              {t('loanTypes.keyFeatures')}
+            </h2>
             <ul className="mt-4 space-y-3 text-sm text-slate-700">
-              {category.keyFeatures.map((feature) => (
-                <li key={feature} className="rounded-2xl bg-slate-50 px-4 py-3">
-                  {feature}
-                </li>
-              ))}
+              {category.keyFeatures.map((feature) => {
+                const [title, ...rest] = feature.split(':')
+                const description = rest.join(':').trim()
+
+                return (
+                  <li key={feature} className="rounded-2xl bg-slate-50 px-4 py-3">
+                    <b>{title.trim()}</b>
+                    {description && <> {description}</>}
+                  </li>
+                )
+              })}
             </ul>
           </section>
 
           <section className="rounded-3xl bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-semibold text-slate-900">{t('loanTypes.considerations')}</h2>
+            <h2 className="text-xl font-semibold text-slate-900">
+              {t('loanTypes.considerations')}
+            </h2>
             <ul className="mt-4 space-y-3 text-sm text-slate-700">
               {category.considerations.map((item) => (
-                <li key={item} className="rounded-2xl border border-slate-200 px-4 py-3">
+                <li
+                  key={item}
+                  className="rounded-2xl border border-slate-200 px-4 py-3"
+                >
                   {item}
+                </li>
+              ))}
+            </ul>
+            <br />
+            <h2 className="text-xl font-semibold text-slate-900">
+              {t('loanTypes.risks')}
+            </h2>
+            <ul className="mt-4 space-y-3 text-sm text-slate-700">
+              {category.risks.map((risk) => (
+                <li key={risk} className="rounded-2xl border border-slate-200 px-4 py-3">
+                  {risk}
                 </li>
               ))}
             </ul>
           </section>
         </div>
 
-        <section className="mt-6 rounded-3xl bg-amber-50 p-6 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-900">{t('loanTypes.risks')}</h2>
+        <section className="mt-6 rounded-3xl bg-white  p-6 shadow-sm">
+          <h2 className="text-xl font-semibold text-slate-900">
+            {t('loanTypes.benefits')}
+          </h2>
           <ul className="mt-4 space-y-3 text-sm text-slate-700">
-            {category.risks.map((risk) => (
-              <li key={risk} className="rounded-2xl bg-white px-4 py-3">
-                {risk}
-              </li>
-            ))}
+            {category.benefits.map((benefit) => {
+              const [title, ...rest] = benefit.split(':')
+              const description = rest.join(':').trim()
+
+              return (
+                <li key={benefit} className="rounded-2xl bg-slate-50 px-4 py-3">
+                  <b>{title.trim()}</b>
+                  {description && <> {description}</>}
+                </li>
+              )
+            })}
           </ul>
         </section>
       </div>
