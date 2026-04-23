@@ -29,7 +29,7 @@ export function SiteHeader() {
     },
     {
       label: t('header.contact'),
-      href: '#contact',
+      href: '/contact-us',
       onlyAccessibleForHomePage: false,
     },
     {

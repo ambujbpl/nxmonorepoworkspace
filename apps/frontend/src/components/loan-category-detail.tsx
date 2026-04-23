@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import '../lib/i18n';
-import type { LoanCategory } from '../app/loan-types/loan-categories';
+import { type LoanCategory } from '@my-monorepo/shared-utils';
 
 export function LoanCategoryDetail({ category }: { category: LoanCategory }) {
   const { t } = useTranslation();
@@ -32,17 +32,34 @@ export function LoanCategoryDetail({ category }: { category: LoanCategory }) {
           </div>
         </section>
 
+        <div className="mx-auto max-w-5xl">
+          <section className="mt-4 rounded-[2rem] p-8 text-white shadow-2xl">
+            <h2 className="text-xl font-semibold text-slate-900">
+              {t('loanTypes.loanDescription')}
+            </h2>
+            <ul className="mt-4 space-y-3 text-sm text-slate-700">
+              {category.description}
+            </ul>
+          </section>
+        </div>
+
         <div className="mt-8 grid gap-6 lg:grid-cols-3">
           <section className="rounded-3xl bg-white p-6 shadow-sm lg:col-span-2">
             <h2 className="text-xl font-semibold text-slate-900">
               {t('loanTypes.keyFeatures')}
             </h2>
             <ul className="mt-4 space-y-3 text-sm text-slate-700">
-              {category.keyFeatures.map((feature) => (
-                <li key={feature} className="rounded-2xl bg-slate-50 px-4 py-3">
-                  {feature}
-                </li>
-              ))}
+              {category.keyFeatures.map((feature) => {
+                const [title, ...rest] = feature.split(':')
+                const description = rest.join(':').trim()
+
+                return (
+                  <li key={feature} className="rounded-2xl bg-slate-50 px-4 py-3">
+                    <b>{title.trim()}</b>
+                    {description && <> {description}</>}
+                  </li>
+                )
+              })}
             </ul>
           </section>
 
@@ -60,19 +77,36 @@ export function LoanCategoryDetail({ category }: { category: LoanCategory }) {
                 </li>
               ))}
             </ul>
+            <br />
+            <h2 className="text-xl font-semibold text-slate-900">
+              {t('loanTypes.risks')}
+            </h2>
+            <ul className="mt-4 space-y-3 text-sm text-slate-700">
+              {category.risks.map((risk) => (
+                <li key={risk} className="rounded-2xl border border-slate-200 px-4 py-3">
+                  {risk}
+                </li>
+              ))}
+            </ul>
           </section>
         </div>
 
-        <section className="mt-6 rounded-3xl bg-amber-50 p-6 shadow-sm">
+        <section className="mt-6 rounded-3xl bg-white  p-6 shadow-sm">
           <h2 className="text-xl font-semibold text-slate-900">
-            {t('loanTypes.risks')}
+            {t('loanTypes.benefits')}
           </h2>
           <ul className="mt-4 space-y-3 text-sm text-slate-700">
-            {category.risks.map((risk) => (
-              <li key={risk} className="rounded-2xl bg-white px-4 py-3">
-                {risk}
-              </li>
-            ))}
+            {category.benefits.map((benefit) => {
+              const [title, ...rest] = benefit.split(':')
+              const description = rest.join(':').trim()
+
+              return (
+                <li key={benefit} className="rounded-2xl bg-slate-50 px-4 py-3">
+                  <b>{title.trim()}</b>
+                  {description && <> {description}</>}
+                </li>
+              )
+            })}
           </ul>
         </section>
       </div>

@@ -58,6 +58,17 @@ describe('SiteHeader', () => {
     expect(screen.queryByRole('link', { name: /benefits/i })).toBeNull();
     expect(screen.queryByRole('link', { name: /^login$/i })).toBeNull();
     expect(screen.getByRole('link', { name: /loan types/i })).toBeTruthy();
+    expect(
+      screen.getByRole('link', { name: /contact/i }).getAttribute('href'),
+    ).toBe('/contact-us');
+  });
+
+  it('hides the contact link on the contact page', () => {
+    mockUsePathname.mockReturnValue('/contact-us');
+
+    render(<SiteHeader />);
+
+    expect(screen.queryByRole('link', { name: /contact/i })).toBeNull();
   });
 
   it('removes the current section link when already on that page', () => {
